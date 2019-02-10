@@ -17,6 +17,27 @@ func TestNewHas(t *testing.T) {
 	}
 }
 
+func TestMembers(t *testing.T) {
+	ss := New("b", "a")
+	got := ss.Members()
+	want := []string{"a", "b"}
+	if len(got) != len(want) {
+		t.Errorf("Members() incorrect element count: got %d want %d", len(got), len(want))
+	}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Errorf("Members() mismatched element: got %q want %q", got[i], want[i])
+		}
+	}
+}
+
+func TestSize(t *testing.T) {
+	ss := New("p", "q", "r")
+	if ss.Size() != 3 {
+		t.Errorf("incorrect size: got %d want 3", ss.Size())
+	}
+}
+
 func TestRemove(t *testing.T) {
 	ss := New("a", "b", "c")
 	ss.Remove("b")

@@ -3,6 +3,7 @@ package stringerset
 
 import (
 	"fmt"
+	"sort"
 )
 
 type StringerSet map[string]struct{}
@@ -33,6 +34,20 @@ func (ss StringerSet) Add(members ...interface{}) {
 	for _, m := range members {
 		ss[toString(m)] = struct{}{}
 	}
+}
+
+// Size returns the number of elements in the set.
+func (ss StringerSet) Size() int {
+	return len(ss)
+}
+
+// Members returns a slice of strings representing the members of the set.
+func (ss StringerSet) Members() (members []string) {
+	for m, _ := range ss {
+		members = append(members, m)
+	}
+	sort.Strings(members)
+	return
 }
 
 // Remove removes the given members from the set, whether or not it is present.
